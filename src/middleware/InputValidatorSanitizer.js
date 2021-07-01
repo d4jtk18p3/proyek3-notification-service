@@ -1,4 +1,4 @@
-import { body, param } from 'express-validator'
+import { body } from 'express-validator'
 
 export const createUserDevice = [
   body('user_id', 'User id tidak boleh kosong').exists(),
