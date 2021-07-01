@@ -7,6 +7,8 @@ const router = express.Router()
 
 router.post(
     '/addNewUser',
+    ValidatorSanitizer.addUserToGroup,
+    transactionMiddleware,
     UserController.addUserToGroup
 )
 
