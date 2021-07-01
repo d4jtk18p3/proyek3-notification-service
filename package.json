@@ -5,11 +5,12 @@
   "type": "module",
   "main": "src/main.js",
   "scripts": {
-    "serve": "nodemon --experimental-specifier-resolution=node -r dotenv/config src/main.js dotenv_config_path=.env.development"
+    "serve": "nodemon --experimental-specifier-resolution=node --experimental-json-modules -r dotenv/config src/main.js dotenv_config_path=.env.development"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "firebase-admin": "^9.10.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
