@@ -1,13 +1,15 @@
 import express from 'express'
-import * as UserController from '../controller/Grup'
+import * as UserDeviceController from '../controller/User_Device'
 import * as ValidatorSanitizer from '../middleware/InputValidatorSanitizer'
 import { transactionMiddleware } from '../middleware/transaction'
 
 const router = express.Router()
 
 router.post(
-    '/addNewUser',
-    UserController.addUserToGroup
+    '/create',
+    ValidatorSanitizer.createUserDevice,
+    transactionMiddleware,
+    UserDeviceController.createUserDevice
 )
 
 export default router
