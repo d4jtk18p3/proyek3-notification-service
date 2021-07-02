@@ -11,5 +11,11 @@ router.post(
     transactionMiddleware,
     UserController.addUserToGroup
 )
+router.post(
+    '/create',
+    ValidatorSanitizer.createGroup,
+    transactionMiddleware,
+    UserController.createGroup
+)
 
 export default router
