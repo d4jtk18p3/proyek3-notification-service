@@ -14,10 +14,13 @@ export const sendEmailGroupNotification = async (req, res, next) => {
       throw error
     }
 
-    const listEmail = await User.findAll({
-      where: db.where(db.col('nama_grup'), groupName)
+    // const listEmail = await User.findAll({
+    //   where: db.where(db.col('nama_grup'), groupName)
+    // })
+    // console.log(listEmail.toJSON())
+    res.json({
+      data: group
     })
-    console.log(listEmail.toJSON())
   } catch (error) {
     next(error)
   }
