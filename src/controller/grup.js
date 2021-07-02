@@ -1,10 +1,18 @@
 import Group from "@proyek3/postgres-database/models/Grup"
+import User from "@proyek3/postgres-database/models/User"
+import { validationResult } from 'express-validator'
 
 export const addUserToGroup  = async (req, res, next) => {
     try{
-        const userList = req.body.userIdList || []
-        const groupName = req.body.groupName
 
+        const userId = req.body.userId
+        const email = req.body.email
+        const groupName = req.body.groupName
+        const error = validationResult(req)
+        if (!error.isEmpty()) {
+            error.status = 400
+            throw error
+        }
         const group = await Group.findByPk(groupName)
         if(!group){
             const error = new Error('Invalid groupname')
@@ -12,9 +20,23 @@ export const addUserToGroup  = async (req, res, next) => {
             error.cause = 'Group dengan nama tersebut tidak ada'
             throw error
         }
-        group.add
+        let user = await User.findByPk(userId)
+        if(!user){
+            if(!email){
+                const error = new Error('Invalid Input')
+                error.statusCode = 400
+                error.cause = 'Emailnya babi!'
+                throw error
+            }
+            user = await User.create({
+                id: userId,
+                email
+            })
+        }
+       await user.addGroup(group)
         res.json({
-            message: "Sucess"
+            message: "Sucess",
+            data: User.create
         })
     }catch (e) {
         next(e)
