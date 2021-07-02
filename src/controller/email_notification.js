@@ -1,6 +1,6 @@
 import Grup from '@proyek3/postgres-database/models/Grup'
 import User from '@proyek3/postgres-database/models/User'
-import db from '@proyek3/postgres-database/db'
+import { sendEmail } from '../util/mailer/mailer'
 
 export const sendEmailGroupNotification = async (req, res, next) => {
   try {
@@ -14,12 +14,44 @@ export const sendEmailGroupNotification = async (req, res, next) => {
       throw error
     }
 
-    // const listEmail = await User.findAll({
-    //   where: db.where(db.col('nama_grup'), groupName)
-    // })
-    // console.log(listEmail.toJSON())
+    const listEmail = []
+    const userList = await group.getUser()
+    for (const el of userList) {
+      listEmail.push(el.email)
+    }
+
+    const result = await sendEmail(subject, bodyEmail, listEmail)
+    if (result instanceof Error) throw result
+
     res.json({
-      data: group
+      message: 'Sukses mengirim email notifikasi',
+      data: result
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+export const sendEmailToIdUser = async (req, res, next) => {
+  try {
+    const { idUser, subject, bodyEmail } = req.body
+
+    const user = await User.findByPk(idUser)
+    if (!user) {
+      const error = new Error('User tidak ditemukan')
+      error.statusCode = 404
+      error.cause = 'Id User tidak ditemukan'
+      throw error
+    }
+
+    const email = user.email
+
+    const result = await sendEmail(subject, bodyEmail, email)
+    if (result instanceof Error) throw result
+
+    res.json({
+      message: 'Sukses mengirim email notifikasi',
+      data: result
     })
   } catch (error) {
     next(error)
