@@ -21,5 +21,19 @@ export const sendEmailGroupNotification = [
     .trim()
     .notEmpty()
     .withMessage('Subjek email tidak boleh kosong'),
-  body('subject').trim().notEmpty().withMessage('Body email tidak boleh kosong')
+  body('bodyEmail').notEmpty().withMessage('Body email tidak boleh kosong')
+]
+
+export const sendEmailToIdUser = [
+  body('idUser')
+    .trim()
+    .notEmpty()
+    .withMessage('Id user tidak boleh kosong')
+    .isString()
+    .withMessage('Id user harus bertipe string'),
+  body('subject')
+    .trim()
+    .notEmpty()
+    .withMessage('Subjek email tidak boleh kosong'),
+  body('bodyEmail').notEmpty().withMessage('Body email tidak boleh kosong')
 ]
