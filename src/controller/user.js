@@ -12,10 +12,13 @@ export const createUser = async (req, res, next) => {
         email: email
       }
     })
+    const messageResponse = !created
+      ? 'Id user sudah terdaftar'
+      : 'Berhasil membuat data user baru'
     res.status(201).json({
-      message: 'Berhasil membuat data user',
+      message: messageResponse,
       data: result,
-      isExistBefore: created
+      isInserNew: created
     })
   } catch (error) {
     next(error)
