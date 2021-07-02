@@ -6,10 +6,10 @@ import { transactionMiddleware } from '../middleware/transaction'
 const router = express.Router()
 
 router.post(
-    '/create',
-    ValidatorSanitizer.createUserDevice,
-    transactionMiddleware,
-    UserDeviceController.createUserDevice
+  '/create',
+  ValidatorSanitizer.createUserDevice,
+  transactionMiddleware,
+  UserDeviceController.createUserDevice
 )
 
 export default router

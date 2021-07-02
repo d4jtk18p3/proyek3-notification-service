@@ -6,16 +6,16 @@ import { transactionMiddleware } from '../middleware/transaction'
 const router = express.Router()
 
 router.post(
-    '/addNewUser',
-    ValidatorSanitizer.addUserToGroup,
-    transactionMiddleware,
-    UserController.addUserToGroup
+  '/addNewUser',
+  ValidatorSanitizer.addUserToGroup,
+  transactionMiddleware,
+  UserController.addUserToGroup
 )
 router.post(
-    '/create',
-    ValidatorSanitizer.createGroup,
-    transactionMiddleware,
-    UserController.createGroup
+  '/create',
+  ValidatorSanitizer.createGroup,
+  transactionMiddleware,
+  UserController.createGroup
 )
 
 export default router

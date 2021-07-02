@@ -2,8 +2,8 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-//Assoctioan
-import setAssociations from "./association"
+//Association
+import setAssociations from './association'
 
 import grupRouter from './routes/Grup'
 import userDeviceRouter from './routes/User_Device'
@@ -17,13 +17,7 @@ app.use('/grup', grupRouter)
 app.use('/user-device', userDeviceRouter)
 app.use('/email-notif', emailNotifRouter)
 
-
-
-
 setAssociations()
-
-
-
 
 // error handling
 app.use((error, req, res, next) => {
@@ -37,6 +31,5 @@ app.use((error, req, res, next) => {
     cause: cause
   })
 })
-
 
 export default app
