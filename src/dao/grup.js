@@ -1,6 +1,6 @@
 import Grup from "@proyek3/postgres-database/models/Grup"
 
-export const insertOneGrup = async (nama) => {
+export const insertOneGroup = async (nama) => {
     try {
         const grup = await Grup.create({
             nama: nama
