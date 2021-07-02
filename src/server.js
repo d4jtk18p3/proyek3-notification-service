@@ -7,6 +7,7 @@ import setAssociations from "./association"
 
 import grupRouter from './routes/Grup'
 import userDeviceRouter from './routes/User_Device'
+import emailNotifRouter from './routes/email_notification'
 
 const app = express()
 app.use(cors())
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use('/grup', grupRouter)
 app.use('/user-device', userDeviceRouter)
+app.use('/email-notif', emailNotifRouter)
 
 
 
