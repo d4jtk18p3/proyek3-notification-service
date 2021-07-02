@@ -39,3 +39,13 @@ export const sendEmailToIdUser = [
     .withMessage('Subjek email tidak boleh kosong'),
   body('bodyEmail').notEmpty().withMessage('Body email tidak boleh kosong')
 ]
+
+export const createUser = [
+  body('idUser').trim().notEmpty().withMessage('Id user tidak boleh kosong'),
+  body('email')
+    .trim()
+    .notEmpty()
+    .withMessage('Email tidak boleh kosong')
+    .isEmail()
+    .withMessage('Format email harus valid')
+]
