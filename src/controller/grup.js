@@ -1,6 +1,29 @@
 import Group from "@proyek3/postgres-database/models/Grup"
 import User from "@proyek3/postgres-database/models/User"
+import { insertOneGroup } from "../dao/grup"
 import { validationResult } from 'express-validator'
+
+export const createGroup = async (req, res, next) => {
+    try{
+        const {nama} = req.body
+    
+        let result = await insertOneGroup(nama)
+
+        if (typeof result === 'undefined'){
+            const error = new Error('Insert Grup gagal')
+            error.statusCode = 500
+            error.cause = 'Insert Grup gagal'
+            throw error
+        }
+
+        res.status(200).json({
+            message: 'Insert Grup berhasil',
+            data: result
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 
 export const addUserToGroup  = async (req, res, next) => {
     try{
