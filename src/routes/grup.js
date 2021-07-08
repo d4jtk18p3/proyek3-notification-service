@@ -1,5 +1,5 @@
 import express from 'express'
-import * as UserController from '../controller/Grup'
+import * as UserController from '../controller/grup'
 import * as ValidatorSanitizer from '../middleware/InputValidatorSanitizer'
 import { transactionMiddleware } from '../middleware/transaction'
 

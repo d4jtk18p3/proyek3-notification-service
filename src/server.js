@@ -5,10 +5,11 @@ import cors from 'cors'
 //Association
 import setAssociations from './association'
 
-import grupRouter from './routes/Grup'
+import grupRouter from './routes/grup'
 import userDeviceRouter from './routes/User_Device'
 import emailNotifRouter from './routes/email_notification'
 import userRouter from './routes/user'
+import notificationRouter from './routes/notification'
 
 const app = express()
 app.use(cors())
@@ -18,6 +19,7 @@ app.use('/grup', grupRouter)
 app.use('/user-device', userDeviceRouter)
 app.use('/email-notif', emailNotifRouter)
 app.use('/user', userRouter)
+app.use('/notification', notificationRouter)
 
 setAssociations()
 
