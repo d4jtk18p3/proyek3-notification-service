@@ -17,21 +17,15 @@ transporter.verify((err, success) => {
   console.log('nodemailer config is correct')
 })
 
-export const sendEmail = async (subject, bodyEmail, listEmail) => {
-  transporter.sendMail(
-    {
-      from: 'Politeknik Negeri Bandung',
-      to: listEmail,
-      subject: subject,
-      html: bodyEmail
-    },
-    (err, info) => {
-      if (err) {
-        console.log(err)
-        return err
-      }
-      console.log(info)
-      return info
-    }
-  )
+export const sendEmail = async (subject, bodyEmail, recipient) => {
+  const address = {
+    name: 'Politeknik Negeri Bandung',
+    address: process.env.NOTIF_EMAIL_EMAIL
+  }
+  return await transporter.sendMail({
+    from: address,
+    to: recipient,
+    subject: subject,
+    html: bodyEmail
+  })
 }

@@ -57,3 +57,19 @@ export const sendEmailToIdUser = async (req, res, next) => {
     next(error)
   }
 }
+
+export const sendEmailToAddress = async (req, res, next) => {
+  try {
+    const { recipientEmail, subject, bodyEmail } = req.body
+
+    const result = await sendEmail(subject, bodyEmail, recipientEmail)
+    if (result instanceof Error) throw result
+
+    res.json({
+      message: 'Sukses mengirim email notifikasi',
+      data: result
+    })
+  } catch (error) {
+    next(error)
+  }
+}

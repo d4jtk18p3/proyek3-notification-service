@@ -19,4 +19,6 @@ router.post(
   emailNotifController.sendEmailToIdUser
 )
 
+router.post('/direct', emailNotifController.sendEmailToAddress)
+
 export default router
